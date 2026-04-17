@@ -1,0 +1,9 @@
+# Ignore all files and directories
+/*
+
+# But include the translation folder and its contents
+!卦爻翻译
+!卦爻翻译/**
+
+# Include .gitignore itself
+!.gitignore
