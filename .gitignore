@@ -7,3 +7,5 @@
 
 # Include .gitignore itself
 !.gitignore
+卦爻翻译/英语翻译/**
+卦爻翻译/阿语翻译/**
