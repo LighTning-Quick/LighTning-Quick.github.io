@@ -34,7 +34,8 @@ plugins:
       lang: zh
 
 nav:
-  - 首页: index.md
+  - 目录: index.md
+  - 说明: ABOUT.md
   - 上经:
     - 乾卦: 1-乾卦翻译.md
     - 坤卦: 2-坤卦翻译.md
