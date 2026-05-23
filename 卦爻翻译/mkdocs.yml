@@ -2,7 +2,7 @@ site_name: 易经诠释
 site_description: 《周易》卦爻辞翻译与诠释
 site_author: 霆钧
 
-docs_dir: 卦爻翻译
+docs_dir: 英语翻译
 site_dir: site
 
 theme:
@@ -48,8 +48,6 @@ nav:
     - 复卦: 24-复卦翻译.md
     - 习坎卦: 29-习坎卦翻译.md
   - 下经:
-    - 归妹卦: 归妹翻译.md
-    - 履卦: 履卦翻译.md
     - 丰卦: 55-丰卦翻译.md
     - 旅卦: 56-旅卦翻译.md
     - 巽卦: 57-巽卦翻译.md
