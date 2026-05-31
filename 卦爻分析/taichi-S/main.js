@@ -1,8 +1,13 @@
 const canvas = document.querySelector("#scene");
+const labelLayer = document.querySelector("#labels");
+const hexagramInput = document.querySelector("#hexagram");
+const annotateButton = document.querySelector("#annotate");
+const annotationStatus = document.querySelector("#annotationStatus");
 const liftInput = document.querySelector("#lift");
 const twistInput = document.querySelector("#twist");
 const speedInput = document.querySelector("#speed");
 const toggleButton = document.querySelector("#toggle");
+const idiomModeButton = document.querySelector("#idiomMode");
 const mirrorButton = document.querySelector("#mirror");
 const resetButton = document.querySelector("#reset");
 
@@ -88,6 +93,7 @@ const state = {
   offsetX: 0,
   offsetY: 0,
   mirrorCurve: false,
+  idiomMode: false,
   speed: Number(speedInput.value),
   playing: true,
   yaw: -0.72,
@@ -95,6 +101,7 @@ const state = {
   distance: 7.4,
   dragging: false,
   panningCurve: false,
+  annotation: null,
   lastX: 0,
   lastY: 0,
 };
@@ -116,10 +123,23 @@ speedInput.addEventListener("input", () => {
   state.speed = Number(speedInput.value);
 });
 
+annotateButton.addEventListener("click", annotateHexagram);
+
+hexagramInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") annotateHexagram();
+});
+
 toggleButton.addEventListener("click", () => {
   state.playing = !state.playing;
   toggleButton.textContent = state.playing ? "暂停" : "播放";
   toggleButton.setAttribute("aria-pressed", String(state.playing));
+});
+
+idiomModeButton.addEventListener("click", () => {
+  state.idiomMode = !state.idiomMode;
+  idiomModeButton.setAttribute("aria-pressed", String(state.idiomMode));
+  idiomModeButton.textContent = state.idiomMode ? "短图式" : "四字成语";
+  updateAnnotationStatus();
 });
 
 mirrorButton.addEventListener("click", () => {
@@ -140,7 +160,10 @@ resetButton.addEventListener("click", () => {
   state.offsetX = 0;
   state.offsetY = 0;
   state.mirrorCurve = false;
+  state.idiomMode = false;
   twistInput.value = "1";
+  idiomModeButton.textContent = "四字成语";
+  idiomModeButton.setAttribute("aria-pressed", "false");
   mirrorButton.textContent = "对称曲线";
   mirrorButton.setAttribute("aria-pressed", "false");
   lastMeshKey = "";
@@ -249,7 +272,120 @@ function render(now) {
   gl.uniform1f(locations.time, now * 0.001);
 
   gl.drawElements(gl.TRIANGLES, mesh.indices.length, gl.UNSIGNED_SHORT, 0);
+  updateLabels(projection, view, model);
   requestAnimationFrame(render);
+}
+
+function annotateHexagram() {
+  const data = window.HEXAGRAM_SCHEMAS || {};
+  const name = normalizeHexagramName(hexagramInput.value);
+  const hexagram = data[name];
+
+  if (!hexagram) {
+    state.annotation = null;
+    labelLayer.innerHTML = "";
+    annotationStatus.textContent = `未找到「${name || "卦名"}」的六图式`;
+    return;
+  }
+
+  const zongName = hexagram.zong;
+  const zong = zongName ? data[zongName] : null;
+  state.annotation = { name, hexagram, zongName, zong };
+  updateAnnotationStatus();
+}
+
+function normalizeHexagramName(value) {
+  return String(value || "")
+    .replace(/[《》〈〉\s]/g, "")
+    .trim();
+}
+
+function updateLabels(projection, view, model) {
+  if (!state.annotation) return;
+
+  const labels = [];
+  appendAnnotationLabels(labels, state.annotation.name, state.annotation.hexagram, false, projection, view, model);
+  if (state.mirrorCurve && state.annotation.zong) {
+    appendAnnotationLabels(labels, state.annotation.zongName, state.annotation.zong, true, projection, view, model);
+  }
+
+  labelLayer.innerHTML = labels.join("");
+}
+
+function updateAnnotationStatus() {
+  if (!state.annotation) return;
+  const mode = state.idiomMode ? "四字成语" : "短图式";
+  annotationStatus.textContent = state.annotation.zong
+    ? `${state.annotation.name}：本卦；${state.annotation.zongName}：对称曲线；${mode}`
+    : `${state.annotation.name}：本卦；未识别综卦；${mode}`;
+}
+
+function appendAnnotationLabels(labels, name, hexagram, mirrored, projection, view, model) {
+  const schemas = (state.idiomMode && hexagram.idioms) ? hexagram.idioms : (hexagram.schemas || {});
+  const points = controlPointSpecs();
+
+  for (const point of points) {
+    const world = controlPointWorld(point.t, mirrored);
+    const screen = projectPoint(world, projection, view, model);
+    if (!screen.visible) continue;
+
+    const schemaNumber = mirrored ? 7 - point.number : point.number;
+    const text = schemas[String(schemaNumber)];
+    if (!text) continue;
+
+    const lift = mirrored ? -10 : 10;
+    const side = point.number <= 3 ? -1 : 1;
+    const x = screen.x + side * 22;
+    const y = screen.y - lift;
+    labels.push(
+      `<div class="point-label${mirrored ? " mirror" : ""}" style="left:${x.toFixed(1)}px;top:${y.toFixed(1)}px"><b>${schemaNumber}</b> ${escapeHtml(text)}</div>`,
+    );
+  }
+}
+
+function controlPointSpecs() {
+  return [
+    { number: 1, t: 0 },
+    { number: 2, t: 0.14 },
+    { number: 3, t: 0.28 },
+    { number: 4, t: 0.72 },
+    { number: 5, t: 0.86 },
+    { number: 6, t: 1 },
+  ];
+}
+
+function controlPointWorld(t, mirrored) {
+  const flat = taijiOneStroke(t);
+  const z = state.lift * 4.6 * (strokeHeight(t) - 0.5);
+  return [
+    state.offsetX + flat[0],
+    state.offsetY + flat[1],
+    mirrored ? -z : z,
+  ];
+}
+
+function projectPoint(point, projection, view, model) {
+  const world = multiplyVec4(model, [point[0], point[1], point[2], 1]);
+  const camera = multiplyVec4(view, world);
+  const clip = multiplyVec4(projection, camera);
+  if (clip[3] <= 0.0001) return { visible: false, x: 0, y: 0 };
+
+  const ndcX = clip[0] / clip[3];
+  const ndcY = clip[1] / clip[3];
+  const visible = ndcX >= -1.2 && ndcX <= 1.2 && ndcY >= -1.2 && ndcY <= 1.2;
+  return {
+    visible,
+    x: (ndcX * 0.5 + 0.5) * canvas.clientWidth,
+    y: (-ndcY * 0.5 + 0.5) * canvas.clientHeight,
+  };
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 function buildTaijiTube(lift) {
@@ -549,6 +685,15 @@ function multiply(a, b) {
     }
   }
   return out;
+}
+
+function multiplyVec4(m, v) {
+  return [
+    m[0] * v[0] + m[4] * v[1] + m[8] * v[2] + m[12] * v[3],
+    m[1] * v[0] + m[5] * v[1] + m[9] * v[2] + m[13] * v[3],
+    m[2] * v[0] + m[6] * v[1] + m[10] * v[2] + m[14] * v[3],
+    m[3] * v[0] + m[7] * v[1] + m[11] * v[2] + m[15] * v[3],
+  ];
 }
 
 function mat3FromMat4(m) {

@@ -53,6 +53,44 @@ body {
   cursor: grabbing;
 }
 
+.labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.point-label {
+  position: absolute;
+  min-width: 58px;
+  max-width: 132px;
+  padding: 5px 7px;
+  border: 1px solid rgba(255, 207, 87, 0.32);
+  border-radius: 8px;
+  background: rgba(5, 7, 9, 0.68);
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.2;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+  white-space: nowrap;
+}
+
+.point-label.mirror {
+  border-color: rgba(83, 188, 206, 0.48);
+  color: #d8fbff;
+}
+
+.point-label b {
+  color: var(--accent);
+  font-weight: 650;
+}
+
+.point-label.mirror b {
+  color: #72ecff;
+}
+
 .hud {
   position: absolute;
   left: clamp(16px, 4vw, 42px);
@@ -64,6 +102,7 @@ body {
   background: var(--panel);
   backdrop-filter: blur(18px);
   box-shadow: 0 22px 80px rgba(0, 0, 0, 0.34);
+  z-index: 2;
 }
 
 .brand {
@@ -101,7 +140,7 @@ p {
 
 .controls {
   display: grid;
-  gap: 14px;
+  gap: 12px;
   margin-top: 22px;
 }
 
@@ -114,9 +153,44 @@ label {
   font-size: 13px;
 }
 
+input[type="text"] {
+  width: 100%;
+  min-height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+  padding: 0 10px;
+  font: inherit;
+  font-size: 13px;
+}
+
 input[type="range"] {
   width: 100%;
   accent-color: var(--accent);
+}
+
+.annotator {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+}
+
+.annotator label {
+  grid-column: 1 / 2;
+}
+
+.annotator button {
+  grid-column: 2 / 3;
+}
+
+.status {
+  grid-column: 1 / -1;
+  min-height: 16px;
+  margin: -3px 0 0 56px;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .actions {

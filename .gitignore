@@ -4,6 +4,8 @@
 # But include the translation folder and its contents
 !卦爻翻译
 !卦爻翻译/**
+!卦爻分析
+!卦爻分析/taichi-S/**
 
 # Include .gitignore itself
 !.gitignore
