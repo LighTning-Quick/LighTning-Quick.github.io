@@ -88,6 +88,11 @@ const buffers = {
   index: gl.createBuffer(),
 };
 
+// 检测是否为移动设备/触摸设备
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                 ('ontouchstart' in window) ||
+                 (navigator.maxTouchPoints > 0);
+
 const state = {
   lift: 0,
   targetLift: 0,
@@ -106,6 +111,9 @@ const state = {
   annotation: null,
   lastX: 0,
   lastY: 0,
+  // 移动设备使用更低的网格质量
+  pathSteps: isMobile ? 180 : 420,
+  radialSteps: isMobile ? 12 : 16,
 };
 
 let mesh = null;
@@ -201,8 +209,10 @@ canvas.addEventListener("pointermove", (event) => {
     state.offsetY = clamp(state.offsetY - dy * dragScale, -1.4, 1.4);
     lastMeshKey = "";
   } else {
-    state.yaw += dx * 0.006;
-    state.pitch = clamp(state.pitch + dy * 0.005, -0.2, 1.34);
+    // 移动设备上增加旋转灵敏度
+    const sensitivity = isMobile ? 1.2 : 1;
+    state.yaw += dx * 0.006 * sensitivity;
+    state.pitch = clamp(state.pitch + dy * 0.005 * sensitivity, -0.2, 1.34);
   }
 });
 
@@ -397,8 +407,8 @@ function escapeHtml(value) {
 }
 
 function buildTaijiTube(lift) {
-  const pathSteps = 420;
-  const radialSteps = 16;
+  const pathSteps = state.pathSteps;
+  const radialSteps = state.radialSteps;
   const radius = 0.055 + lift * 0.025;
   const height = lift * 4.6;
   const positions = [];
