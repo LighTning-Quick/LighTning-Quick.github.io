@@ -245,7 +245,7 @@ input[type="range"] {
   margin-top: 18px;
 }
 
-button {
+.actions button {
   min-width: 78px;
   min-height: 36px;
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -257,7 +257,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.actions button:hover {
   border-color: rgba(255, 207, 87, 0.54);
   background: rgba(255, 207, 87, 0.12);
 }
