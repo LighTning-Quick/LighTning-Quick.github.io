@@ -4,6 +4,10 @@
 # But include the translation folder and its contents
 !卦爻翻译
 !卦爻翻译/**
+
+# Include site directory for GitHub Pages
+!site
+!site/**
 !卦爻分析
 !卦爻分析/taichi-S/**
 

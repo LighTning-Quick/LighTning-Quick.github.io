@@ -3,7 +3,7 @@ site_description: 《周易》卦爻辞翻译与诠释
 site_author: 霆钧
 
 docs_dir: 英语翻译
-site_dir: site
+site_dir: ../site
 
 theme:
   name: material
