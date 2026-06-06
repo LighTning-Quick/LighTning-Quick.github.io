@@ -103,6 +103,52 @@ body {
   backdrop-filter: blur(18px);
   box-shadow: 0 22px 80px rgba(0, 0, 0, 0.34);
   z-index: 2;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.hud.collapsed .brand p,
+.hud.collapsed .controls,
+.hud.collapsed .actions {
+  display: none;
+}
+
+.hud.collapsed {
+  max-height: 60px;
+  opacity: 0.85;
+}
+
+.collapse-toggle {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.collapse-toggle:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--ink);
+}
+
+.collapse-icon {
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.hud.collapsed .collapse-icon {
+  transform: rotate(180deg);
 }
 
 .brand {
@@ -218,15 +264,20 @@ button:hover {
 
 @media (max-width: 640px) {
   .hud {
-    top: 8px;
-    right: 8px;
+    bottom: 8px;
+    top: auto;
     left: 8px;
-    bottom: auto;
+    right: 8px;
     width: auto;
     max-width: none;
     padding: 14px;
     max-height: 50vh;
     overflow-y: auto;
+  }
+
+  .hud.collapsed {
+    max-height: 50px;
+    bottom: 8px;
   }
 
   .brand {

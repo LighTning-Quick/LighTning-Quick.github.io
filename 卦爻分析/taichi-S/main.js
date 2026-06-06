@@ -10,6 +10,8 @@ const toggleButton = document.querySelector("#toggle");
 const idiomModeButton = document.querySelector("#idiomMode");
 const mirrorButton = document.querySelector("#mirror");
 const resetButton = document.querySelector("#reset");
+const collapseToggle = document.querySelector("#collapseToggle");
+const hud = document.querySelector(".hud");
 
 const gl = canvas.getContext("webgl", { antialias: true, alpha: true });
 
@@ -167,6 +169,12 @@ resetButton.addEventListener("click", () => {
   mirrorButton.textContent = "对称曲线";
   mirrorButton.setAttribute("aria-pressed", "false");
   lastMeshKey = "";
+});
+
+collapseToggle.addEventListener("click", () => {
+  hud.classList.toggle("collapsed");
+  const isCollapsed = hud.classList.contains("collapsed");
+  collapseToggle.setAttribute("aria-pressed", String(isCollapsed));
 });
 
 canvas.addEventListener("pointerdown", (event) => {
