@@ -115,5 +115,5 @@ The generated website is written to the `site` directory at the project root.
 
 ## 署名 / Attribution
 
-整理、释义与翻译：霆钧（Li Tingjun）  
-Compilation, interpretation, and translation: Li Tingjun
+整理、释义与翻译：黎庭云（知乎账号同名） tingjun_li@yeah.net
+Compiled, explained, and translated by: Li Tingyun (same name on Zhihu account) tingjun_li@yeah.net
