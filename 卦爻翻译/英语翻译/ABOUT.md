@@ -51,6 +51,8 @@ Organized around the name of each hexagram, this project adopt a working hypothe
 | 8 | 比 | Bi | [阅读 / Read](8-比卦翻译.md) |
 | 9 | 小畜 | Xiaochu | [阅读 / Read](9-小畜卦翻译.md) |
 | 10 | 履 | Lü | [阅读 / Read](10-履卦翻译.md) |
+| 11 | 泰 | Tai | [阅读 / Read](11-泰卦翻译.md) |
+| 12 | 否 | Pi | [阅读 / Read](12-否卦翻译.md) |
 | 13 | 同人 | Tongren | [阅读 / Read](13-同人卦翻译.md) |
 | 14 | 大有 | Dayou | [阅读 / Read](14-大有卦翻译.md) |
 | 15 | 谦 | Qian | [阅读 / Read](15-谦卦翻译.md) |
@@ -115,5 +117,5 @@ The generated website is written to the `site` directory at the project root.
 
 ## 署名 / Attribution
 
-整理、释义与翻译：黎庭云（知乎账号同名） tingjun_li@yeah.net
+整理、释义与翻译：黎庭云（知乎账号同名） tingjun_li@yeah.net<br>
 Compiled, explained, and translated by: Li Tingyun (same name on Zhihu account) tingjun_li@yeah.net
