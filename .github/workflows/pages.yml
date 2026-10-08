@@ -25,7 +25,7 @@ jobs:
       - uses: actions/configure-pages@v5
         id: pages
       - name: Build Jekyll site
-        run: bundle exec jekyll build --strict_front_matter --url "${{ steps.pages.outputs.origin }}" --baseurl "${{ steps.pages.outputs.base_path }}"
+        run: bundle exec jekyll build --strict_front_matter --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
       - name: Mount local hobby websites
