@@ -1,18 +1,29 @@
-# Ignore all files and directories
-/*
+# Ignore the contents of the _site directory and other cache directories
+_site/
+.sass-cache/
 
-# But include the translation folder and its contents
-!卦爻翻译
-!卦爻翻译/**
+# Ignore the directory for local files during development
+local/
 
-# Include site directory for GitHub Pages
-!site
-!site/**
-!卦爻分析
-!卦爻分析/taichi-S/**
+# Ignore the Gemfile that is generated
+Gemfile.lock
 
-# Include .gitignore itself
-!.gitignore
-卦爻翻译/英语翻译分析/**
-卦爻翻译/阿语翻译/**
-卦爻分析/*
+# Ignore files created by npm
+node_modules
+
+# Ignore the vendor file at root level and bundle for alternative installation
+/vendor/
+.bundle/
+
+# Ignore folders related to IDEs
+.vscode/
+
+# Ignore files created by MacOS
+.DS_Store
+
+preview/
+
+.integration/
+# Excluded personal materials from the original I Ching project
+卦爻翻译/英语翻译分析/
+卦爻翻译/阿语翻译/

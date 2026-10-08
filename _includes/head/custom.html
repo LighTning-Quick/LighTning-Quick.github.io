@@ -1,0 +1,8 @@
+{% include base_path %}
+<link rel="stylesheet" href="{{ base_path }}/assets/css/fontawesome.css">
+<link rel="stylesheet" href="{{ base_path }}/assets/css/academic-custom.css">
+<link rel="icon" type="image/svg+xml" href="{{ base_path }}/images/favicon.svg">
+<meta name="theme-color" content="#173e66">
+
+{% if page.alternate_url %}<link rel="alternate" hreflang="{% if page.lang == 'zh' %}en{% else %}zh-CN{% endif %}" href="{{ page.alternate_url | absolute_url }}">{% endif %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">

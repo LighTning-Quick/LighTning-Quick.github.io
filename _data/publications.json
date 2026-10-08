@@ -1,0 +1,36 @@
+[
+  {
+    "title": "Pride and Prejudice: Toward an Information-Theoretic Framework for Mutually Communicative Driver Behavior Modeling",
+    "authors": "T. Li, N. Xu, S. Feng, H. Askari, B. H. G. Barbosa, and K. Guo",
+    "venue": "IEEE Transactions on Intelligent Transportation Systems",
+    "year": 2026,
+    "doi": "10.1109/TITS.2026.3703952",
+    "group": "Journal Articles"
+  },
+  {
+    "title": "Responsibility-Based Socially Compatible Driving Behavior Modeling Verified by Hierarchical Multi-Agent Inverse Reinforcement Learning",
+    "authors": "T. Li, N. Xu, S. Feng, H. Askari, B. H. G. Barbosa, and K. Guo",
+    "venue": "IEEE Transactions on Intelligent Transportation Systems",
+    "year": 2025,
+    "doi": "10.1109/TITS.2025.3577660",
+    "details": "Vol. 26, No. 9, pp. 14353–14370",
+    "group": "Journal Articles"
+  },
+  {
+    "title": "Modelling Trust with Interaction Uncertainty Verified by Mutual Subjective Evaluation",
+    "authors": "T. Li, N. Xu, and K. Guo",
+    "venue": "9th CAA International Conference on Vehicular Control and Intelligence (CVCI)",
+    "year": 2025,
+    "details": "Qiandao, China, pp. 1–6",
+    "award": "Kong Hui Paper Award",
+    "group": "Conference Papers"
+  },
+  {
+    "title": "Deep Reinforcement Learning Based Truck Eco-Driving in Mixed Traffic Utilizing Terrain Information",
+    "authors": "T. Li, N. Xu, and K. Guo",
+    "venue": "Proceedings of China SAE Congress",
+    "year": 2021,
+    "details": "pp. 183–191",
+    "group": "Conference Papers"
+  }
+]

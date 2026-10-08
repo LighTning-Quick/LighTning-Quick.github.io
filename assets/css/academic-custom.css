@@ -1,0 +1,24 @@
+/* Fonts and type scale are inherited from the original Academic Pages theme. */
+.intro-role,.section-meta,.paper-meta { color: var(--global-text-color); }
+.name-cn { white-space: nowrap; }
+.profile-links { margin: 1.5em 0; }
+.page__content a { overflow-wrap: anywhere; }
+.paper { padding: .35em 0 1em; }
+.paper h3 { line-height: 1.5; margin: .8em 0 .4em; }
+.paper p { margin: .4em 0; }
+.award { color: var(--global-base-color); font-weight: 600; }
+.page__footer { position: relative; bottom: auto; }
+.language-switch a { white-space: nowrap; }
+.hobby-resources section { padding: .1em 0 1em; border-bottom: 1px solid var(--global-border-color); }
+.translation-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1em; padding: .8em 0; border-bottom: 1px solid var(--global-border-color); }
+.translation-actions { display: flex; flex-wrap: wrap; gap: .4em 1em; }
+.hexagram-number { display: inline-block; min-width: 2.2em; color: var(--global-text-color-light); }
+.reader-links { margin: 1em 0 2em; line-height: 1.8; }
+.translation-content { overflow-wrap: anywhere; }
+.translation-content table { display: block; max-width: 100%; overflow-x: auto; }
+@media(max-width:600px) { .translation-row { display: block; } .translation-actions { margin-top: .5em; } }
+
+.author__details { line-height: 1.7; }
+.author__details a { white-space: normal; overflow-wrap: anywhere; }
+
+.author__urls-wrapper > button { color: var(--global-text-color); background: var(--global-footer-bg-color); border: 1px solid var(--global-border-color); }

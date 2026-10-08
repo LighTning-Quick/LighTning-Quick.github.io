@@ -1,0 +1,22 @@
+main:
+  - title: Publications
+    url: /publications/
+  - title: Research
+    url: /research/
+  - title: Teaching & Service
+    url: /teaching/
+  - title: CV
+    url: /cv/
+  - title: Hobbies
+    url: /activities/
+main_zh:
+  - title: 论文
+    url: /zh/publications/
+  - title: 研究经历
+    url: /zh/research/
+  - title: 教学与服务
+    url: /zh/teaching/
+  - title: 简历
+    url: /zh/cv/
+  - title: 兴趣
+    url: /zh/activities/
