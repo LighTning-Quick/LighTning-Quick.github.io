@@ -8,7 +8,7 @@
 | --- | --- |
 | Academic Pages `_pages/` | `/` 及 `/zh/` 下的学术页面 |
 | `_pages/activities*.html` | `/activities/`、`/zh/activities/` |
-| `site/` | `/hobbies/iching/`，保留其内部相对目录 |
+| `site/` | `/site/`，保留其内部相对目录 |
 | `卦爻分析/taichi-S/` | `/hobbies/taiji/` |
 | `卦爻翻译/` | 仅作为仓库中的译文 Markdown 源码 |
 
@@ -42,4 +42,4 @@
 
 ## 已知验证边界
 
-本地预览使用原版 Academic Pages 模板与 Sass，正式部署使用 Jekyll；本机没有 Ruby，正式 Jekyll 构建尚未执行，GitHub 工作流也尚未触发。
+本地预览使用原版 Academic Pages 模板与 Sass；正式 Jekyll 构建已通过 GitHub Actions 验证。发布保留 /site/*，根目录用于学术主页。

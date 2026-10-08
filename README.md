@@ -19,7 +19,7 @@
 - `/teaching/`、`/zh/teaching/`：教学与服务
 - `/cv/`、`/zh/cv/`：在线简历与 PDF 下载
 - `/activities/`、`/zh/activities/`：Hobbies / 兴趣
-- `/hobbies/iching/`：从本地 `site/` 挂载的易经阅读站
+- `/site/`：从本地 `site/` 挂载的易经阅读站
 - `/hobbies/taiji/`：从本地 `卦爻分析/taichi-S/` 挂载的太极 S
 
 译文阅读直接使用 `site/` 下已有 HTML，未另行生成译文页面。`卦爻翻译/` 保留 Markdown 源码，不生成另一套公开阅读页。`scripts/mount-hobbies.cjs` 在预览与正式构建中将现有网页挂载到 Hobbies 下，并加入返回兴趣栏目的入口。
