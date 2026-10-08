@@ -1,0 +1,38 @@
+name: Validate academic homepage
+on:
+  push:
+    branches: ['codex/academic-homepage-integration']
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+      - name: Build Jekyll site
+        run: bundle exec jekyll build --strict_front_matter
+        env:
+          JEKYLL_ENV: production
+      - name: Mount local hobby websites
+        run: node scripts/mount-hobbies.cjs _site
+      - name: Verify generated pages
+        run: |
+          test -s _site/index.html
+          test -s _site/zh/index.html
+          test -s _site/cv/index.html
+          test -s _site/activities/index.html
+          test -s _site/hobbies/iching/index.html
+          test -s _site/hobbies/taiji/index.html
+          test -s _site/assets/css/main.css
+          test -s _site/assets/css/fontawesome.css
+      - uses: actions/upload-artifact@v4
+        with:
+          name: validated-jekyll-site
+          path: _site
