@@ -27,3 +27,6 @@ preview/
 # Excluded personal materials from the original I Ching project
 卦爻翻译/英语翻译分析/
 卦爻翻译/阿语翻译/
+.note
+.env
+.claude/settings.local.json
