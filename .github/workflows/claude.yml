@@ -1,0 +1,33 @@
+name: Claude
+on:
+  issue_comment: { types: [created] }
+  pull_request_review_comment: { types: [created] }
+  issues: { types: [opened, assigned] }
+
+# 同一 issue/PR 上的多次 @claude 串行执行,避免并行烧额度
+concurrency:
+  group: claude-${{ github.event.issue.number || github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  claude:
+    if: contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: anthropics/claude-code-action@v1
+        env:
+          # 走智谱 GLM 的 Anthropic 兼容端点(与本机 settings.json 保持一致)
+          ANTHROPIC_BASE_URL: https://open.bigmodel.cn/api/anthropic
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ZHIPU_API_KEY }}
+          API_TIMEOUT_MS: '3000000'
+          ANTHROPIC_DEFAULT_HAIKU_MODEL: glm-5.3-flash[1m]
+          ANTHROPIC_DEFAULT_SONNET_MODEL: glm-5.3-flash[1m]
+          ANTHROPIC_DEFAULT_OPUS_MODEL: glm-5.3-flash[1m]
+        with:
+          # action 要求提供鉴权凭据;这里传智谱 key,配合上面的 BASE_URL 指向智谱
+          anthropic_api_key: ${{ secrets.ZHIPU_API_KEY }}
