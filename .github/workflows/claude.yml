@@ -29,5 +29,7 @@ jobs:
           ANTHROPIC_DEFAULT_SONNET_MODEL: glm-5.3-flash[1m]
           ANTHROPIC_DEFAULT_OPUS_MODEL: glm-5.3-flash[1m]
         with:
+          # 显式传内置 token,跳过 OIDC→App 换取流程(无需安装 Claude App 和 id-token 权限)
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           # action 要求提供鉴权凭据;这里传智谱 key,配合上面的 BASE_URL 指向智谱
           anthropic_api_key: ${{ secrets.ZHIPU_API_KEY }}
