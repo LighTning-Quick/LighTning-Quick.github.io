@@ -6,3 +6,17 @@ author_profile: true
 ---
 
 <p>The page you requested could not be found. <a href="{{ '/' | relative_url }}">Return to the homepage</a>.</p>
+
+<script>
+/* Old I Ching project paths now live in the dedicated repository. */
+(function () {
+  var path = location.pathname;
+  var target = null;
+  if (path.indexOf('/site/') === 0) {
+    target = 'https://lightning-quick.github.io/yijing/' + path.slice('/site/'.length);
+  } else if (path.indexOf('/hobbies/taiji/') === 0) {
+    target = 'https://lightning-quick.github.io/yijing/taiji/' + path.slice('/hobbies/taiji/'.length);
+  }
+  if (target) location.replace(target + location.search + location.hash);
+})();
+</script>

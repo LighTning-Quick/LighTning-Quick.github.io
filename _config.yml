@@ -147,9 +147,6 @@ exclude:
   - README.md
   - UPSTREAM.md
   - AGENTS.md
-  - site
-  - 卦爻分析
-  - 卦爻翻译
   - .integration
   - INTEGRATION.md
   - package-lock.json

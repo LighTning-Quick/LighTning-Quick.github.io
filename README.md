@@ -1,6 +1,8 @@
-# 学术主页与易经项目
+# 学术主页
 
 根目录为 Academic Pages 学术主页，提供中英文切换。字体、字号体系及主题来自原始网页模板，不套用 PDF 简历字体。
+
+易经项目（卦爻翻译阅读站与太极 S）已于 2026-11 迁至独立仓库 `LighTning-Quick/yijing`（本仓库旁的 `../yijing/` 文件夹），发布于 `https://lightning-quick.github.io/yijing/`；本仓库兴趣栏目链接过去，旧地址 `/site/` 与 `/hobbies/taiji/` 由跳转页与 404 脚本自动接引。
 
 ## 本地查看
 
@@ -18,11 +20,8 @@
 - `/publications/`、`/zh/publications/`：论文
 - `/teaching/`、`/zh/teaching/`：教学与服务
 - `/cv/`、`/zh/cv/`：在线简历与 PDF 下载
-- `/activities/`、`/zh/activities/`：Hobbies / 兴趣
-- `/site/`：从本地 `site/` 挂载的易经阅读站
-- `/hobbies/taiji/`：从本地 `卦爻分析/taichi-S/` 挂载的太极 S
-
-译文阅读直接使用 `site/` 下已有 HTML，未另行生成译文页面。`卦爻翻译/` 保留 Markdown 源码，不生成另一套公开阅读页。`scripts/mount-hobbies.cjs` 在预览与正式构建中将现有网页挂载到 Hobbies 下，并加入返回兴趣栏目的入口。
+- `/activities/`、`/zh/activities/`：Hobbies / 兴趣（链接至独立易经仓库）
+- `/site/`、`/hobbies/taiji/`：旧地址跳转页（易经阅读站与太极 S 已迁至 `lightning-quick.github.io/yijing/`）
 
 ## 修改内容
 
@@ -33,17 +32,11 @@
 - `_data/publications.json`：论文资料；论文正式题名保留英文。
 - `files/Tingjun_Li_CV.pdf`：英文 PDF 简历，沿用现有文件。
 - `assets/css/academic-custom.css`：少量间距及兴趣栏目样式；不覆盖模板字体。
+- `_pages/redirect-site.html`、`_pages/redirect-taiji.html`：旧地址跳转页；`_pages/404.html` 内含 `/site/*`、`/hobbies/taiji/*` 深层旧链接的自动接引脚本。
 
 ## 同步易经项目的相关文件
 
-在本文件夹运行：
-
-    node scripts/import-iching.cjs "E:/OneDrive/文档/八卦/3.释义/周易译注黎批/易经诠释"
-    npm run build:preview
-
-导入器只读取指定的 `site/`、`卦爻分析/taichi-S/` 与 `卦爻翻译/`，并参考原项目 `.gitignore`，不会复制整份 OneDrive 项目。太极 S 是明确要求导入的内容，优先于原 ignore 中屏蔽父目录的宽泛规则。导入是复制操作，原目录不受修改；不会自动删除目标中的文件。
-
-构建正式输出时，先执行 `bundle exec jekyll build`，再执行 `node scripts/mount-hobbies.cjs _site`。工作流已包含这两个步骤。
+易经内容现由独立仓库管理（本仓库旁 `../yijing/`），从中 OneDrive 源项目的导入、构建与发布均在那个仓库进行，见其 README。本仓库仅需在阅读站地址变化时更新兴趣栏目链接与跳转页。
 
 ## GitHub 整合与发布
 

@@ -35,7 +35,6 @@ if(/{%\s*(include|assign|if|for)\b/.test(html))throw Error('Unrendered template 
 const destination=path.join(out,page.url.endsWith('/')?page.url.slice(1)+'index.html':page.url.slice(1));
 fs.mkdirSync(path.dirname(destination),{recursive:true});fs.writeFileSync(destination,html);rendered++;
 }
-require('./mount-hobbies.cjs').mount('preview');
 console.log('Rendered '+rendered+' pages with the original Academic Pages theme; copied legacy web assets and Markdown sources.');
 }
 const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.pdf':'application/pdf','.md':'text/plain; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.woff2':'font/woff2','.woff':'font/woff','.ttf':'font/ttf','.gz':'application/gzip'};

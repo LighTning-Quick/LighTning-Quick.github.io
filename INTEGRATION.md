@@ -1,18 +1,27 @@
 # 整合说明
 
-采用一个 GitHub Pages 仓库：个人介绍首页位于根目录，CV 位于 /cv/，兴趣项目由同仓库中的已有本地网页构建到子路径。不使用 iframe，不跳转到旧站，不重新生成译文阅读页。
+个人介绍首页位于根目录，CV 位于 /cv/。
 
-## 路径映射
+> **2026-11 更新**：易经相关内容（`site/`、`卦爻翻译/`、`卦爻分析/taichi-S/`）已分离至独立仓库 `LighTning-Quick/yijing`，由其自带 GitHub Actions 构建发布到 `https://lightning-quick.github.io/yijing/`（阅读站）与 `.../yijing/taiji/`（太极 S）。本仓库兴趣栏目直接链接新地址；旧路径 `/site/*` 与 `/hobbies/taiji/*` 由 `_pages/redirect-site.html`、`_pages/redirect-taiji.html` 及 404 页脚本自动跳转。`scripts/mount-hobbies.cjs` 与 `scripts/import-iching.cjs` 已随迁至新仓库（或删除）。以下为分离前的整合记录，供追溯。
+
+## 路径映射（分离后）
 
 | 仓库源码 | 构建后网址 |
 | --- | --- |
 | Academic Pages `_pages/` | `/` 及 `/zh/` 下的学术页面 |
-| `_pages/activities*.html` | `/activities/`、`/zh/activities/` |
+| `_pages/activities*.html` | `/activities/`、`/zh/activities/`（链接至 yijing 仓库站点） |
+| `_pages/redirect-site.html` | `/site/`（跳转至 `lightning-quick.github.io/yijing/`） |
+| `_pages/redirect-taiji.html` | `/hobbies/taiji/`（跳转至 `.../yijing/taiji/`） |
+
+## 路径映射（分离前，历史记录）
+
+| 仓库源码 | 构建后网址 |
+| --- | --- |
 | `site/` | `/site/`，保留其内部相对目录 |
 | `卦爻分析/taichi-S/` | `/hobbies/taiji/` |
 | `卦爻翻译/` | 仅作为仓库中的译文 Markdown 源码 |
 
-`site`、`卦爻分析`、`卦爻翻译` 从 Jekyll 的直接输出中排除。Jekyll 构建后，`scripts/mount-hobbies.cjs` 将前两者挂载到兴趣子路径，并在输出 HTML 中增加返回兴趣的链接、修正旧阅读站的自引用链接。源码 HTML、JS、CSS 与 Markdown 保持原文件内容。
+分离前 `site`、`卦爻分析`、`卦爻翻译` 从 Jekyll 的直接输出中排除，Jekyll 构建后由 `scripts/mount-hobbies.cjs` 挂载到兴趣子路径并注入返回兴趣栏目的链接。
 
 ## Git 历史
 
@@ -34,12 +43,12 @@
 
 1. 在当前目录完善并检查双语学术主页。
 2. 原 OneDrive 项目继续用于译注写作与 MkDocs 导出。
-3. 完成新的 MkDocs 构建后，运行本仓库导入脚本同步相关文件，再检查预览。
+3. 易经内容的导入与构建已移至 `../yijing/` 独立仓库，由其工作流发布。
 4. 将整合分支推送至同一远程，通过 PR 合入 main。
-5. GitHub Pages 使用 GitHub Actions；工作流构建学术主页后挂载两个兴趣项目，再整体部署。
+5. GitHub Pages 使用 GitHub Actions；工作流构建学术主页后部署，易经阅读站由 yijing 仓库的工作流独立发布。
 
 不要直接将 Academic Pages 的上游 main 推到现有远程 main。当前整合分支已经以你的远程历史为起点。
 
 ## 已知验证边界
 
-本地预览使用原版 Academic Pages 模板与 Sass；正式 Jekyll 构建已通过 GitHub Actions 验证。发布保留 /site/*，根目录用于学术主页。
+本地预览使用原版 Academic Pages 模板与 Sass；正式 Jekyll 构建已通过 GitHub Actions 验证。根目录用于学术主页；易经阅读站与太极 S 由独立仓库发布，旧地址仅保留跳转。
